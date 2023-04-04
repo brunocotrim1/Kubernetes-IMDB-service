@@ -1,3 +1,4 @@
+SET client_encoding TO 'UTF8';
 drop table if exists aka;
 drop table if exists crew;
 drop table if exists person;
@@ -85,13 +86,13 @@ ALTER TABLE public.person SET UNLOGGED;
 ALTER TABLE public.episode SET UNLOGGED;
 ALTER TABLE public.crew SET UNLOGGED;
 
-COPY public.title(tconst,title_type ,primary_title,original_title,is_adult,start_year,end_year,runtime_minutes,genres) FROM '/dataset/title.basics.tsv' delimiter E'\t' HEADER;
-COPY public.ratings(tconst,average_rating,num_votes) FROM '/dataset/title.ratings.tsv' delimiter E'\t' HEADER;
-COPY public.principal(tconst,"ordering",nconst,category,job,"characters") FROM '/dataset/title.principals.tsv' delimiter E'\t' HEADER;
-COPY public.person(nconst,primary_name,birth_year,death_year,primary_profession,known_for_titles) FROM '/dataset/name.basics.tsv' delimiter E'\t' HEADER;
-COPY public.episode(tconst,parent_tconst,season_number,episode_number) FROM '/dataset/title.episode.tsv' delimiter E'\t' HEADER;
-COPY public.crew(tconst,directors,writers) FROM '/dataset/title.crew.tsv' delimiter E'\t' HEADER;
-COPY public.aka(title_id,"ordering",title,region,"language","types","attributes","is_original_title") FROM '/dataset/title.akas.tsv' delimiter E'\t' HEADER;
+\COPY public.title(tconst,title_type ,primary_title,original_title,is_adult,start_year,end_year,runtime_minutes,genres) FROM './dataset/title.basics.tsv' delimiter E'\t' HEADER;
+\COPY public.ratings(tconst,average_rating,num_votes) FROM './dataset/title.ratings.tsv' delimiter E'\t' HEADER;
+\COPY public.principal(tconst,"ordering",nconst,category,job,"characters") FROM './dataset/title.principals.tsv' delimiter E'\t' HEADER;
+\COPY public.person(nconst,primary_name,birth_year,death_year,primary_profession,known_for_titles) FROM './dataset/name.basics.tsv' delimiter E'\t' HEADER;
+\COPY public.episode(tconst,parent_tconst,season_number,episode_number) FROM './dataset/title.episode.tsv' delimiter E'\t' HEADER;
+\COPY public.crew(tconst,directors,writers) FROM './dataset/title.crew.tsv' delimiter E'\t' HEADER;
+\COPY public.aka(title_id,"ordering",title,region,"language","types","attributes","is_original_title") FROM './dataset/title.akas.tsv' delimiter E'\t' HEADER;
 
 CREATE INDEX hundrer_filter_index ON public.title (title_type, start_year);
 CREATE INDEX title_by_genre ON public.title (title_type, genres);

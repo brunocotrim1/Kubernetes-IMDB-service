@@ -37,4 +37,12 @@ move title.ratings.tsv .\dataset
 
 
 rmdir /S /Q gzip-1.3.12-1-bin
+
+curl -O "https://get.enterprisedb.com/postgresql/postgresql-14.1-1-windows-x64-binaries.zip"
+tar -xf postgresql-14.1-1-windows-x64-binaries.zip
+pgsql\bin\psql.exe -h localhost -U postgres -d postgres -f ./data.sql
+rmdir /S /Q pgsql
+rmdir /S /Q dataset
+del /F /Q postgresql-14.1-1-windows-x64-binaries.zip
+
 echo Done!
