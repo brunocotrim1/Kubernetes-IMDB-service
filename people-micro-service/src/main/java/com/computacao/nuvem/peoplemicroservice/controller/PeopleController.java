@@ -4,6 +4,9 @@ import com.computacao.nuvem.peoplemicroservice.model.Person;
 import com.computacao.nuvem.peoplemicroservice.service.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,7 +15,8 @@ public class PeopleController {
     PeopleService peopleService;
 
     @PutMapping("/updatePerson")
-    public ResponseEntity<?> updatePerson(@RequestBody Person person) {
+    public ResponseEntity<?> updatePerson(@RequestBody Person person, @AuthenticationPrincipal OidcUser principal) {
+        System.out.println(principal.getAttributes());
         return peopleService.managePerson(person);
     }
 
