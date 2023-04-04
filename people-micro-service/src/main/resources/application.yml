@@ -3,7 +3,8 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgres_db:5432/postgres
+    #postgres-db-lb
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
@@ -13,11 +14,31 @@ spring:
     hibernate:
     # ddl-auto: create-drop
     show-sql: false
+  security:
+    oauth2:
+      client:
+        registration:
+          auth0:
+            client-id: 6IfdQJ0dWmk3HBdIQ1TtFcHjJD7hpikV
+            client-secret: 8yhrXJGtfaJh59t93CKvfiGmAhXWVdNv9_kps4wNZtR9WFlpBpRSQbqf3JeozToe
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          auth0:
+            # trailing slash is important!
+            issuer-uri: https://dev-aula3bjod6orbofw.us.auth0.com/
 
 app:
   urls:
     title-micro-service: "http://title-micro-service:8080"
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 #https://feilerdev.wordpress.com/2017/12/05/installing-postgresql-on-windows-using-zip-archive-without-the-installer/
 #https://www.enterprisedb.com/download-postgresql-binaries
 #pg_ctl.exe start -D ../data
+
