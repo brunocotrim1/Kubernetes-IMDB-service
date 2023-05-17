@@ -27,3 +27,4 @@ curl --location 'https://dev-aula3bjod6orbofw.us.auth0.com/oauth/token' \
     "grant_type": "client_credentials"
 }' 
 This request will give you an access token that will provide you admin access to restricted endpoints
+

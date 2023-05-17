@@ -24,14 +24,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "TBEcGvY4z"
+        "uid": "SmaqGKL4k"
       },
       "fieldConfig": {
         "defaults": {
@@ -160,7 +160,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "TBEcGvY4z"
+        "uid": "SmaqGKL4k"
       },
       "fieldConfig": {
         "defaults": {
@@ -241,6 +241,7 @@
           },
           "editorMode": "builder",
           "expr": "http_server_requests_seconds_count{instance=\"episode-micro-service.default.svc.cluster.local:8082\"}",
+          "hide": false,
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -288,7 +289,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "TBEcGvY4z"
+        "uid": "SmaqGKL4k"
       },
       "fieldConfig": {
         "defaults": {
@@ -394,6 +395,7 @@
           },
           "editorMode": "builder",
           "expr": "process_cpu_usage{instance=\"episode-micro-service.default.svc.cluster.local:8082\"}",
+          "hide": false,
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -439,10 +441,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "TBEcGvY4z"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -522,6 +521,7 @@
           },
           "editorMode": "builder",
           "expr": "http_server_requests_seconds_sum{instance=\"episode-micro-service.default.svc.cluster.local:8082\"}",
+          "hide": true,
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -575,7 +575,7 @@
           "refId": "E"
         }
       ],
-      "title": "Panel Title",
+      "title": "HTTP Request Timesum",
       "type": "timeseries"
     }
   ],
@@ -593,6 +593,6 @@
   "timezone": "",
   "title": "Cloud Computation DashBoard",
   "uid": "B1WDqDYVk",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }
