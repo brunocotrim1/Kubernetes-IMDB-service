@@ -1,6 +1,7 @@
 package com.computacao.nuvem.tittlesmicroservice.service;
 
 import com.computacao.nuvem.tittlesmicroservice.model.Aka;
+import com.computacao.nuvem.tittlesmicroservice.model.CustomLogs;
 import com.computacao.nuvem.tittlesmicroservice.model.Ratings;
 import com.computacao.nuvem.tittlesmicroservice.model.Title;
 import com.computacao.nuvem.tittlesmicroservice.model.repository.AkaRepository;

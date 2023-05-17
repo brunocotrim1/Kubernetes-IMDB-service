@@ -1,7 +1,10 @@
 server:
   port: 8080
-
 spring:
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: localhost:9300
   datasource:
     url: jdbc:postgresql://postgres-db-lb:5432/postgres
     username: postgres
@@ -34,6 +37,8 @@ management:
     web:
       exposure:
         include: health,info,prometheus
+
+
 #https://feilerdev.wordpress.com/2017/12/05/installing-postgresql-on-windows-using-zip-archive-without-the-installer/
 #https://www.enterprisedb.com/download-postgresql-binaries
 #pg_ctl.exe start -D ../data

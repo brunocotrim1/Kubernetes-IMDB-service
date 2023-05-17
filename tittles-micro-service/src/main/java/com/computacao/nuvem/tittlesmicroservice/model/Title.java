@@ -2,10 +2,7 @@ package com.computacao.nuvem.tittlesmicroservice.model;
 
 import com.computacao.nuvem.tittlesmicroservice.model.converter.StringListConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -19,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
+@ToString
 public class Title implements Serializable {
 
     @Id

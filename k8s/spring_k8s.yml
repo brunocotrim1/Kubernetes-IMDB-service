@@ -7,6 +7,11 @@ spec:
   selector:
     matchLabels:
       app: title-micro-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -55,182 +60,182 @@ spec:
       port: 8080
       targetPort: 8080
   type: ClusterIP
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: people-micro-service
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: people-micro-service
-  template:
-    metadata:
-      labels:
-        app: people-micro-service
-    spec:
-      containers:
-        - name: people-micro-service
-          image: people-micro-service:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-          # Resource Limits
-          resources:
-            requests:
-              memory: "265Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
-          livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-          # Readiness Probe
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: people-micro-service
-spec:
-  selector:
-    app: people-micro-service
-  ports:
-    - name: http
-      protocol: TCP
-      port: 8081
-      targetPort: 8080
-  type: ClusterIP
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: people-micro-service
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: people-micro-service
+#   template:
+#     metadata:
+#       labels:
+#         app: people-micro-service
+#     spec:
+#       containers:
+#         - name: people-micro-service
+#           image: people-micro-service:latest
+#           imagePullPolicy: IfNotPresent
+#           ports:
+#             - containerPort: 8080
+#           # Resource Limits
+#           resources:
+#             requests:
+#               memory: "265Mi"
+#               cpu: "250m"
+#             limits:
+#               memory: "512Mi"
+#               cpu: "500m"
+#           livenessProbe:
+#             httpGet:
+#               path: /actuator/health/liveness
+#               port: 8080
+#             initialDelaySeconds: 30
+#             periodSeconds: 10
+#             timeoutSeconds: 5
+#           # Readiness Probe
+#           readinessProbe:
+#             httpGet:
+#               path: /actuator/health/readiness
+#               port: 8080
+#             initialDelaySeconds: 30
+#             periodSeconds: 10
+#             timeoutSeconds: 5
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: people-micro-service
+# spec:
+#   selector:
+#     app: people-micro-service
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 8081
+#       targetPort: 8080
+#   type: ClusterIP
 
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: episode-micro-service
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: episode-micro-service
-  template:
-    metadata:
-      labels:
-        app: episode-micro-service
-    spec:
-      containers:
-        - name: episode-micro-service
-          image: episode-micro-service:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-          # Resource Limits
-          resources:
-            requests:
-              memory: "265Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
-          livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-          # Readiness Probe
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: episode-micro-service
-spec:
-  selector:
-    app: episode-micro-service
-  ports:
-    - name: http
-      protocol: TCP
-      port: 8082
-      targetPort: 8080
-  type: ClusterIP
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: episode-micro-service
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: episode-micro-service
+#   template:
+#     metadata:
+#       labels:
+#         app: episode-micro-service
+#     spec:
+#       containers:
+#         - name: episode-micro-service
+#           image: episode-micro-service:latest
+#           imagePullPolicy: IfNotPresent
+#           ports:
+#             - containerPort: 8080
+#           # Resource Limits
+#           resources:
+#             requests:
+#               memory: "265Mi"
+#               cpu: "250m"
+#             limits:
+#               memory: "512Mi"
+#               cpu: "500m"
+#           livenessProbe:
+#             httpGet:
+#               path: /actuator/health/liveness
+#               port: 8080
+#             initialDelaySeconds: 30
+#             periodSeconds: 10
+#             timeoutSeconds: 5
+#           # Readiness Probe
+#           readinessProbe:
+#             httpGet:
+#               path: /actuator/health/readiness
+#               port: 8080
+#             initialDelaySeconds: 30
+#             periodSeconds: 10
+#             timeoutSeconds: 5
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: episode-micro-service
+# spec:
+#   selector:
+#     app: episode-micro-service
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 8082
+#       targetPort: 8080
+#   type: ClusterIP
 
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: principals-micro-service
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: principals-micro-service
-  template:
-    metadata:
-      labels:
-        app: principals-micro-service
-    spec:
-      containers:
-        - name: principals-micro-service
-          image: principals-micro-service:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-          # Resource Limits
-          resources:
-            requests:
-              memory: "265Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
-          livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-          # Readiness Probe
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: principals-micro-service
-spec:
-  selector:
-    app: principals-micro-service
-  ports:
-    - name: http
-      protocol: TCP
-      port: 8083
-      targetPort: 8080
-  type: ClusterIP
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: principals-micro-service
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: principals-micro-service
+#   template:
+#     metadata:
+#       labels:
+#         app: principals-micro-service
+#     spec:
+#       containers:
+#         - name: principals-micro-service
+#           image: principals-micro-service:latest
+#           imagePullPolicy: IfNotPresent
+#           ports:
+#             - containerPort: 8080
+#           # Resource Limits
+#           resources:
+#             requests:
+#               memory: "265Mi"
+#               cpu: "250m"
+#             limits:
+#               memory: "512Mi"
+#               cpu: "500m"
+#           livenessProbe:
+#             httpGet:
+#               path: /actuator/health/liveness
+#               port: 8080
+#             initialDelaySeconds: 30
+#             periodSeconds: 10
+#             timeoutSeconds: 5
+#           # Readiness Probe
+#           readinessProbe:
+#             httpGet:
+#               path: /actuator/health/readiness
+#               port: 8080
+#             initialDelaySeconds: 30
+#             periodSeconds: 10
+#             timeoutSeconds: 5
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: principals-micro-service
+# spec:
+#   selector:
+#     app: principals-micro-service
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 8083
+#       targetPort: 8080
+#   type: ClusterIP
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -256,78 +261,78 @@ spec:
         target:
           type: AverageValue
           averageUtilization: 50
----
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: episode-micro-service-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: episode-micro-service
-  minReplicas: 1
-  maxReplicas: 10
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 50
-    - type: Resource
-      resource:
-        name: memory
-        target:
-          type: AverageValue
-          averageUtilization: 50
----
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: people-micro-service-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: people-micro-service
-  minReplicas: 1
-  maxReplicas: 10
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 50
-    - type: Resource
-      resource:
-        name: memory
-        target:
-          type: AverageValue
-          averageUtilization: 50
----
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: principals-micro-service-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: principals-micro-service
-  minReplicas: 1
-  maxReplicas: 10
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 50
-    - type: Resource
-      resource:
-        name: memory
-        target:
-          type: AverageValue
-          averageUtilization: 50
+# ---
+# apiVersion: autoscaling/v2
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: episode-micro-service-hpa
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: episode-micro-service
+#   minReplicas: 1
+#   maxReplicas: 10
+#   metrics:
+#     - type: Resource
+#       resource:
+#         name: cpu
+#         target:
+#           type: Utilization
+#           averageUtilization: 50
+#     - type: Resource
+#       resource:
+#         name: memory
+#         target:
+#           type: AverageValue
+#           averageUtilization: 50
+# ---
+# apiVersion: autoscaling/v2
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: people-micro-service-hpa
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: people-micro-service
+#   minReplicas: 1
+#   maxReplicas: 10
+#   metrics:
+#     - type: Resource
+#       resource:
+#         name: cpu
+#         target:
+#           type: Utilization
+#           averageUtilization: 50
+#     - type: Resource
+#       resource:
+#         name: memory
+#         target:
+#           type: AverageValue
+#           averageUtilization: 50
+# ---
+# apiVersion: autoscaling/v2
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: principals-micro-service-hpa
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: principals-micro-service
+#   minReplicas: 1
+#   maxReplicas: 10
+#   metrics:
+#     - type: Resource
+#       resource:
+#         name: cpu
+#         target:
+#           type: Utilization
+#           averageUtilization: 50
+#     - type: Resource
+#       resource:
+#         name: memory
+#         target:
+#           type: AverageValue
+#           averageUtilization: 50

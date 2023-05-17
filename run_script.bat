@@ -8,4 +8,5 @@ kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.
 kubectl apply -f ./k8s/postgres-statefulset.yml
 kubectl apply -f ./k8s/spring_k8s.yml
 kubectl apply -f ./k8s/ingress.yml
+kubectl apply -f ./k8s/ElasticSearch.yml
 

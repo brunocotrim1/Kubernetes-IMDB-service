@@ -1,14 +1,14 @@
-# PostgreSQL StatefulSet ConfigMap
+# PostgreSQL StatefulSet Secret
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
-  name: postgres-db-config
+  name: postgres-db-secret
   labels:
     app: postgresql-db
 data:
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
-  PGDATA: /data/pgdata
+  POSTGRES_USER: cG9zdGdyZXM=  # Base64-encoded value for 'postgres'
+  POSTGRES_PASSWORD: cG9zdGdyZXM=  # Base64-encoded value for 'postgres'
+  PGDATA: L2RhdGEvcGdkYXRh  # Base64-encoded value for '/data/pgdata'
 
 # PostgreSQL StatefulSet Service
 ---
@@ -60,8 +60,8 @@ spec:
               mountPath: /data
           # Point to ConfigMap
           envFrom:
-          - configMapRef:
-              name: postgres-db-config
+            - secretRef:
+                name: postgres-db-secret
       # Volume Claim
   volumeClaimTemplates:
       - metadata:
