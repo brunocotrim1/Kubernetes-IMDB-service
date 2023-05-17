@@ -27,3 +27,6 @@ curl --location 'https://dev-aula3bjod6orbofw.us.auth0.com/oauth/token' \
     "grant_type": "client_credentials"
 }' 
 This request will give you an access token that will provide you admin access to restricted endpoints
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+In this final phases we scale down the project to only use the tittle-micro-service due to cloud costs and resource management but all the pods are equally efficient 
+so whenever the budget is inscreased and a few more GB of memory is added (around 2GB) the other services can be scaled up 
