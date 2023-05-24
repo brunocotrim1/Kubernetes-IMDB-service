@@ -60,6 +60,8 @@ public class TitleService {
 
     public ResponseEntity<?> titleCatalog(int pageNumber) {
         Page<Title> page = titleRepository.findAll(PageRequest.of(pageNumber, 100));
+        if(page == null)
+            return ResponseEntity.notFound().build();
         List<Title> titles = page.getContent();
         return titles.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(titles);
     }
